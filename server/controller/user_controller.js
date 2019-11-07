@@ -8,11 +8,14 @@ require('dotenv').config();
 
 const registerUser = async (req, res) => {
   const { error } = resgisterValid(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error){
+    console.log(error);
+    return res.status(400).send({error});
+  }
 
   const emailExists = await User.findOne({email: req.body.email});
-  if(emailExists) return res.status(400).send('Email Already Exists');
-
+  if(emailExists) return res.status(400).send({error: 'Email Already Exists'});
+  
   const salt = await bcrypt.genSalt(10);
   const hashedPass = await bcrypt.hash(req.body.password, salt);
 
@@ -21,29 +24,28 @@ const registerUser = async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: hashedPass,
-      sex: req.body.sex,
-      dob: req.body.dob
     });
     const user = await person.save();
     return res.status(200).send({_id: user._id});
-  }catch(err){
-    res.status(500).send(err);
+  }catch(error){
+    console.log(error);
+    res.status(500).send(error);
   }
-
 }
 
 const loginUser = async (req, res) => {
   const { error } = loginValid(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send({error});
 
   const user = await User.findOne({email: req.body.email});
-  if(!user) return res.status(400).send('Email or Password is invalid');
+  if(!user) return res.status(404).send({error: 'Email or Password is invalid'});
 
   const validPass = await bcrypt.compare(req.body.password, user.password);
-  if(!validPass) return res.status(400).send('Email or Password is invalid');
+  if(!validPass) return res.status(404).send({error: 'Email or Password is invalid'});
 
   const token = jwt.sign({_id: user._id}, process.env.JWT_TOKEN);
-  res.header('auth-token', token).status(200).send("Check Header for 'auth-token'");
+  res.header('auth_token', token).status(200).send({token});
+  // res.header('auth-token', token).status(200).send("Check Header for 'auth-token'");
 }
 
 module.exports = { registerUser, loginUser };

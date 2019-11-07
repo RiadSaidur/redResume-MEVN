@@ -5,10 +5,10 @@ const updateDetails = async (req, res) => {
 
   const user = await User.findById(req.user._id);
 
-  if(!user) return res.status(404).send('user not found');
+  if(!user) return res.status(404).send({error: 'user not found'});
 
   const { error } = cValid(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send({error: error.details[0].message});
 
   try {
     user.cv = req.body;
@@ -16,7 +16,7 @@ const updateDetails = async (req, res) => {
     res.send(result.cv);
   } catch (error) {
     console.log(error);
-    res.status(500).send(error.message);
+    res.status(500).send(error);
   }
 
 }
@@ -31,19 +31,18 @@ const deleteResume = async (req, res) => {
     res.send(result.cv);
   } catch (error) {
     console.log(error);
-    res.status(500).send(error.message);
+    res.status(500).send(error);
   }
 
 }
 
 const userDetails = async (req, res) => {
 
-  if(!User.findById(req.user)) return res.status(404).send('user not found');
+  if(!User.findById(req.user)) return res.status(404).send({error: 'user not found'});
   
   try {
-    const {name, email, sex, dob, cv} = await User.findById(req.user._id);
-    res.status(200).send({name, email, sex, dob, cv});
-    // res.status(200).send(cv);
+    const { cv } = await User.findById(req.user._id);
+    res.status(200).send(cv);
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
