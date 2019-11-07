@@ -4,8 +4,6 @@ const UserSchema = mongoose.Schema({
   name: { type: String, min: 3, max: 100, required: true },
   email: { type: String, min: 8, max: 255, required: true },
   password: { type: String, min: 8, max: 1024, required: true },
-  sex: { type: String, min: 3, max: 6, required: true },
-  dob: { type: String, min: 8, max: 20, required: true },
   cv: {
     name: { type: String, min: 3, max: 100},
     address: { type: String, min: 8, max: 255},
