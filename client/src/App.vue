@@ -24,11 +24,17 @@ export default {
 body{
   background-color: rgba(240, 248, 255, 0.384);
 }
+button{
+  cursor: pointer;
+}
 button:focus{
   outline: 0;
 }
 a{
   text-decoration: none;
   color: inherit;
+}
+li{
+  list-style: none;
 }
 </style>

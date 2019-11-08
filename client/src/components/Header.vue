@@ -1,13 +1,42 @@
 <template>
-  <nav>
-    <router-link to='/'><h1>red | Resume</h1></router-link>
-    <div class="menu">
-      <button @click="{{alert('clicked')}}"><img src="../assets/hamburger.svg" alt="menu"></button>
+  <div>
+    <nav>
+      <router-link to='/'><h1>red | Resume</h1></router-link>
+      <div class="menu">
+        <button @click="click"><img src="../assets/hamburger.svg" alt="menu"></button>
+      </div>
+    </nav>
+    <div class='container' :class="{menuItems: showMenu, hidden: !showMenu}">
+        <ul>
+          <li><h1>Demo</h1></li>
+          <li><h1>Contact</h1></li>
+          <li><h1>About Us</h1></li>
+        </ul>
     </div>
-  </nav>
+  </div>
 </template>
 
+<script>
+export default {
+  name: 'Header',
+  data(){
+    return{
+      showMenu: false
+    }
+  },
+  methods: {
+    click(){
+      this.showMenu = !this.showMenu;
+    }
+  }
+}
+</script>
+
 <style scoped>
+  .container{
+    padding: 5rem 0rem 2rem 2rem;
+    width: 100vw;
+  }
   nav{
     position: fixed;
     top:0;
@@ -23,18 +52,19 @@
     z-index: 2;
     color: azure;
   }
-  /* button{
-    border: 2px solid rgba(19, 9, 165, 0.911);
-    border-radius: 1000px;
-    width: 8rem;
-    height: 2.5rem;
-    font-size: 20px;
-    font-weight: 500;
-    background: rgb(19, 9, 165);
-    color: #fff;
-  } */
+  button{
+    border: none;
+    background: none;
+  }
   img{
     pointer-events: none;
+  }
+  .hidden{
+    display: none;
+  }
+  .menuItems{
+    display: block;
+    position: relative;
   }
   @media screen and (max-width: 720px){
   nav{

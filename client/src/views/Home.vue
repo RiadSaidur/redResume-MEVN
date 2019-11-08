@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <img src="../assets/moon-figure.svg" alt="">
     <div class="content">
       <h1>Create Resume on the go</h1>
       <section class="signin">
@@ -12,6 +11,7 @@
         <router-link to='/signup'><button>Sign Up</button></router-link>
       </section>
     </div>
+    <img src="../assets/moon-figure.svg">
   </div>
 </template>
 
@@ -25,11 +25,15 @@ export default {
 <style scoped>
 .home{
   width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 img{
-  position: absolute;
+  /* position: absolute;
   top: 15%;
-  right: 4%;
+  right: 4%; */
+  margin-top: 7rem;
   pointer-events: none;
 }
 .content{
@@ -45,18 +49,16 @@ h2, button{
 }
 button{
   background-color: inherit;
-  border: 2px solid rgba(19, 9, 165, 0.911);
+  border: 2px solid #102D59;
   border-radius: 1000px;
   width: 10rem;
   height: 3rem;
   font-size: 20px;
-  color: rgba(21, 12, 153, 0.911);
+  color: #102D59;
   font-weight: 500;
-  word-spacing: .2rem;
-  letter-spacing: .1rem;
 }
 .signin button{
-  background: rgb(19, 9, 165);
+  background: #102D59;
   color: #fff;
 }
 @media screen and (max-width: 720px){
