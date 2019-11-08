@@ -42,10 +42,10 @@ const userDetails = async (req, res) => {
   
   try {
     const { cv } = await User.findById(req.user._id);
-    res.status(200).send(cv);
+    res.status(200).send({cv});
   } catch (error) {
     console.log(error);
-    res.status(500).send(error);
+    res.status(500).send({error});
   }
 
 }
