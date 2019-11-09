@@ -30,9 +30,6 @@ export default {
   justify-content: space-around;
 }
 img{
-  /* position: absolute;
-  top: 15%;
-  right: 4%; */
   margin-top: 7rem;
   pointer-events: none;
 }

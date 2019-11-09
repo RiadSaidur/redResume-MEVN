@@ -1,33 +1,46 @@
 <template>
   <div class="container">
-    {{resumeX}}
-    <form>
-      <label for="name" class="inp">
-        <input type="text" id="name" placeholder=" " v-model="resume.name">
-        <span class="label">Name</span>
-        <span class="border"></span>
-      </label>
-      <label for="email" class="inp">
-        <input type="email" id="email" placeholder=" " v-model="resume.email">
-        <span class="label">Email</span>
-        <span class="border"></span>
-      </label>
-      <label for="phone" class="inp">
-        <input type="text" id="phone" placeholder=" " v-model="resume.phone">
-        <span class="label">Phone</span>
-        <span class="border"></span>
-      </label>
-      <label for="address" class="inp">
-        <input type="text" id="address" placeholder=" " v-model="resume.address">
-        <span class="label">Address</span>
-        <span class="border"></span>
-      </label>
-      <label for="" class="inp">
-        <input type="text" id="" placeholder=" " v-model="resume.email">
-        <span class="label"></span>
-        <span class="border"></span>
-      </label>
-    </form>
+    <h1 class="title">RESUME</h1>
+
+    <section class="personal">
+      <h1>{{resumeX.name}}</h1>
+      <p>{{resumeX.email}}</p>
+      <p>{{resumeX.mobile}}</p>
+      <p>{{resumeX.address}}</p>
+    </section>
+
+    <h2>Educational Background</h2>
+    <section class="edu" v-for="(degree, idx) in resumeX.education" :key="idx">
+      <div class="degree">
+        <h3>Year {{degree.year}}</h3>
+        <div class="edu_details">
+          <div class="institute">
+            <h3>{{degree.type}}:</h3> <p>{{degree.institute}}</p>
+          </div>
+          <div class="gpa">
+            <h3>GPA:</h3> <p>{{degree.gpa}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2>Languages</h2>
+    <section class="lang" v-for="(lang, idx) in resumeX.skills" :key="idx">
+      <ul>
+        <li><p>{{lang}}</p></li>
+      </ul>
+    </section>
+
+    <h2>Personal Infromation</h2>
+    <section class="info">
+      <div><h3>Father</h3> <p>{{resumeX.father}}</p></div>
+      <div><h3>Mother</h3> <p>{{resumeX.mother}}</p></div>
+      <div><h3>Date of Birth </h3> <p>{{resumeX.dob}}</p></div>
+      <div><h3>Blood Group</h3> <p>{{resumeX.blood}}</p></div>
+      <div><h3>Natinality</h3> <p>{{resumeX.nationality}}</p></div>
+      <div><h3>Maritial Status</h3> <p>{{resumeX.status}}</p></div>
+      <div><h3>Permanent Address</h3> <p>{{resumeX.permanent}}</p></div>
+    </section>
   </div>
 </template>
 
@@ -39,24 +52,6 @@ export default {
   name: 'resume',
   data(){
     return{
-      resume:{
-        name: null,
-        address: null,
-        email: null,
-        mobile: null,
-        education: null,
-        skills: null,
-        father: null,
-        mother: null,
-        dob: null,
-        sex: null,
-        religion: null,
-        blood: null,
-        nationality: null,
-        status: null,
-        hobby: null,
-        permanent: null
-      },
       resumeX: null
     }
   },
@@ -85,66 +80,59 @@ export default {
 
 <style scoped>
 .container{
-  margin: 5rem 2rem 0rem 2rem;
+  width: 8.27in;
+  width: 8.27in;
+  margin: 5rem auto 2rem auto;
+  background-color: aqua;
+  padding: 2rem 1rem;
 }
-form{
-    display: flex;
-    flex-direction: column;
-  }
-  .inp {
-    position: relative;
-    width: 280px;
-    margin-bottom: 1rem;
-  }
-  .inp .label {
-    position: absolute;
-    top: 16px;
-    left: 0;
-    font-size: 16px;
-    color: #9098a9;
-    font-weight: 500;
-    transform-origin: 0 0;
-    transition: all 0.2s ease;
-  }
-  .inp .border {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background: #07f;
-    transform: scaleX(0);
-    transform-origin: 0 0;
-    transition: all 0.15s ease;
-  }
-  .inp input {
-    -webkit-appearance: none;
-    width: 100%;
-    border: 0;
-    font-family: inherit;
-    padding: 12px 0;
-    height: 48px;
-    font-size: 16px;
-    font-weight: 500;
-    border-bottom: 2px solid #c8ccd4;
-    background: none;
-    border-radius: 0;
-    color: #223254;
-    transition: all 0.15s ease;
-  }
-  .inp input:not(:placeholder-shown) + span {
-    color: #5a667f;
-    transform: translateY(-26px) scale(0.75);
-  }
-  .inp input:focus {
-    background: none;
-    outline: none;
-  }
-  .inp input:focus + span {
-    color: #07f;
-    transform: translateY(-26px) scale(0.75);
-  }
-  .inp input:focus + span + .border {
-    transform: scaleX(1);
-  }
+h2{
+  text-align: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid black;
+  padding-bottom: .5rem;
+}
+section{
+  margin-bottom: 2rem;
+  padding: 0rem 2rem;
+}
+ul{
+  padding-left: 2rem;
+}
+li{
+  list-style: circle;
+  font-weight: 500;
+  text-transform: capitalize;
+  line-height: 1rem;
+}
+p{
+  margin-left: .5rem;
+}
+.title{
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid black;
+  padding-bottom: .5rem;
+}
+.degree{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.institute{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+}
+.institute > h3{
+  text-transform: uppercase;
+}
+.gpa{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+}
+.info > div{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
 </style>
