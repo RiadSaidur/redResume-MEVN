@@ -9,9 +9,10 @@
     <transition name="drawer">
       <div class='container menuItems' v-show="showMenu">
           <ul>
-            <li><a href="#">How to</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">About</a></li>
+            <li><router-link to='/howto'>How To</router-link></li>
+            <li><router-link to='/contacts'>Contact Us</router-link></li>
+            <li><router-link to='/about'>About Us</router-link></li>
+            <li v-show="authorized" @click="logout"><router-link to='/'>Log Out</router-link></li>
           </ul>
       </div>
     </transition>
@@ -19,6 +20,9 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+import { signOutUser } from '../services/user_services'
+
 export default {
   name: 'Header',
   data(){
@@ -26,9 +30,19 @@ export default {
       showMenu: false
     }
   },
+  computed: {
+    ...mapState([
+      'authorized'
+    ])
+  },
   methods: {
+    ...mapActions(['toggleAuth']),
     click(){
       this.showMenu = !this.showMenu;
+    },
+    logout(){
+      signOutUser();
+      this.toggleAuth(false);
     }
   }
 }
@@ -68,40 +82,6 @@ export default {
     color: aliceblue;
     font-size: 1.2rem;
     line-height: 2rem;
-  }
-
-  .drawer-enter-active, .drawer-leave-active{
-    transition: opacity 500ms;
-  }
-
-  .drawer-enter, .drawer-leave-to{
-    opacity: 0;
-  }
-
-  @keyframes drawer_in{
-    0%{
-      transform: translateY(-50px);
-      opacity: 0;
-    }
-    100%{
-      transform: translateY(0px);
-      opacity: 1;
-    }
-  }
-
-  @keyframes drawer_out{
-    0%{
-      transform: translateY(0px);
-      opacity: 1;
-    }
-    99%{
-      transform: translateY(-100px);
-      opacity: 0;
-      
-    }
-    100%{
-      display: none;
-    }
   }
 
   @media screen and (max-width: 720px){

@@ -21,3 +21,7 @@ export async function signUser(user){
     return { error: 'Email or Password is invalid' };
   }
 }
+
+export function signOutUser(){
+  localStorage.token = null;
+}

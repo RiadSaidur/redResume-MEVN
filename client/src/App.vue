@@ -37,4 +37,13 @@ a{
 li{
   list-style: none;
 }
+.drawer-enter-active{
+  transition: opacity 500ms ease;
+}
+.drawer-leave-active{
+  transition: opacity 500ms ease;
+}
+.drawer-enter, .drawer-leave-to{
+  opacity: 0;
+}
 </style>

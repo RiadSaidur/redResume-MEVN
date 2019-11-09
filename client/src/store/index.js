@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    authorized: false,
     user: null,
     resume: null
   },
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     UPDATE_USER: (state, user) => {
       state.user = user;
+    },
+    TOGGLE: (state, value) => {
+      state.authorized = value;
     }
   },
   actions: {
@@ -30,6 +34,9 @@ export default new Vuex.Store({
     },
     updateUser: (context, user) => {
       context.commit('UPDATE_USER', user);
+    },
+    toggleAuth: (context, value) => {
+      context.commit('TOGGLE', value);
     }
   },
   modules: {
