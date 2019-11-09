@@ -21,7 +21,14 @@ const options = {
   useNewUrlParser: true
 };
 
-mongoose.connect(process.env.MONGODB_URI, options, () => console.log('Connected to DB'));
+mongoose.connect(process.env.MONGODB_URI, options);
+mongoose.connection.on('connected', () => {
+  console.log('connected to DB');
+});
+
+mongoose.connection.on('error', err => {
+  console.log(`Error: ${err}`);
+});
 
 const PORT = process.env.PORT || 5000;
 
