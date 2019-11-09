@@ -1,18 +1,20 @@
 <template>
-  <div class="home">
-    <div class="content">
-      <h1>Create Resume on the go</h1>
-      <section class="signin">
-        <h2>Try redResume for free</h2>
-        <router-link to='/signin'><button>Sign In</button></router-link>
-      </section>
-      <section>
-        <h2>Don't have an account?</h2>
-        <router-link to='/signup'><button>Sign Up</button></router-link>
-      </section>
+  <transition name="drawer">
+    <div class="home">
+      <div class="content">
+        <h1>Create Resume on the go</h1>
+        <section class="signin">
+          <h2>Try redResume for free</h2>
+          <router-link to='/signin'><button>Sign In</button></router-link>
+        </section>
+        <section>
+          <h2>Don't have an account?</h2>
+          <router-link to='/signup'><button>Sign Up</button></router-link>
+        </section>
+      </div>
+      <img src="../assets/moon-figure.svg">
     </div>
-    <img src="../assets/moon-figure.svg">
-  </div>
+  </transition>
 </template>
 
 <script>

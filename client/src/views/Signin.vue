@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <transition name="drawer">
     <LoginForm />
-  </div>
+  </transition>
 </template>
 
 <script>

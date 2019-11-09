@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <transition name="drawer">
    <RegisterFrom />
-  </div>
+  </transition>
 </template>
 
 <script>
