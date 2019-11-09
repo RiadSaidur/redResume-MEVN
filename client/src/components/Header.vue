@@ -6,13 +6,15 @@
         <button @click="click"><img src="../assets/hamburger.svg" alt="menu"></button>
       </div>
     </nav>
-    <div class='container' :class="{menuItems: showMenu, hidden: !showMenu}">
-        <ul>
-          <li><h1>Demo</h1></li>
-          <li><h1>Contact</h1></li>
-          <li><h1>About Us</h1></li>
-        </ul>
-    </div>
+    <transition name="drawer">
+      <div class='container menuItems' v-show="showMenu">
+          <ul>
+            <li><a href="#">How to</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -36,6 +38,7 @@ export default {
   .container{
     padding: 5rem 0rem 2rem 2rem;
     width: 100vw;
+    background-color: #102D59;
   }
   nav{
     position: fixed;
@@ -59,13 +62,48 @@ export default {
   img{
     pointer-events: none;
   }
-  .hidden{
-    display: none;
-  }
   .menuItems{
-    display: block;
+    display: inherit;
     position: relative;
+    color: aliceblue;
+    font-size: 1.2rem;
+    line-height: 2rem;
   }
+
+  .drawer-enter-active, .drawer-leave-active{
+    transition: opacity 500ms;
+  }
+
+  .drawer-enter, .drawer-leave-to{
+    opacity: 0;
+  }
+
+  @keyframes drawer_in{
+    0%{
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    100%{
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+
+  @keyframes drawer_out{
+    0%{
+      transform: translateY(0px);
+      opacity: 1;
+    }
+    99%{
+      transform: translateY(-100px);
+      opacity: 0;
+      
+    }
+    100%{
+      display: none;
+    }
+  }
+
   @media screen and (max-width: 720px){
   nav{
     padding: 0rem 1rem;
