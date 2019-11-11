@@ -7,5 +7,5 @@ export async function getResume(){
   const auth_token = localStorage.token;
   if(!auth_token) return {error: 'Access Denied'};
   const res =  await axios.get(`${baseURI}/`, {headers: { auth_token }});
-  return res.data.cv;
+  return res.data.resume;
 }
