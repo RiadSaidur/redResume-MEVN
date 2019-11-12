@@ -38,10 +38,11 @@ li{
   list-style: none;
 }
 .drawer-enter-active{
-  transition: opacity 500ms ease;
+  transition: opacity 400ms ease;
 }
 .drawer-leave-active{
-  transition: opacity 500ms ease;
+  transition-delay: 500ms;
+  transition: opacity 400ms ease;
 }
 .drawer-enter, .drawer-leave-to{
   opacity: 0;

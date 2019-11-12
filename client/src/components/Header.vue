@@ -3,16 +3,22 @@
     <nav>
       <router-link to='/'><h1>red | Resume</h1></router-link>
       <div class="menu">
-        <button @click="click"><img src="../assets/hamburger.svg" alt="menu"></button>
+        <button @click="toggleNav"><img src="../assets/hamburger.svg" alt="menu"></button>
       </div>
     </nav>
     <transition name="drawer">
       <div class='container menuItems' v-if="showMenu">
-          <ul>
+          <ul @click="toggleNav">
+            <div v-if="authorized" class="authorize">
+              <li><router-link to='/update'>Update</router-link></li>
+              <li><router-link to='/resume'>Resume</router-link></li>
+              <li  @click="logout"><router-link to='/'>Log Out</router-link></li>
+            </div>
+            <div v-if="!authorized" class="authorize">
+              <li><router-link to='/contacts'>Contact Us</router-link></li>
+              <li><router-link to='/about'>About Us</router-link></li>
+            </div>
             <li><router-link to='/howto'>How To</router-link></li>
-            <li><router-link to='/contacts'>Contact Us</router-link></li>
-            <li><router-link to='/about'>About Us</router-link></li>
-            <li v-if="authorized" @click="logout"><router-link to='/'>Log Out</router-link></li>
           </ul>
       </div>
     </transition>
@@ -37,7 +43,7 @@ export default {
   },
   methods: {
     ...mapActions(['toggleAuth']),
-    click(){
+    toggleNav(){
       this.showMenu = !this.showMenu;
     },
     logout(){
@@ -57,11 +63,20 @@ export default {
     z-index: 2;
   }
   .container{
-    padding: 1rem 2rem 2rem 2rem;
+    padding: 0rem 2rem 2rem 2rem;
     width: 100vw;
     background-color: #102D59;
     box-shadow: #000 0px 2px 10px;
     z-index: 1;
+  }
+  .container li {
+    display: flex;
+    text-align: right;
+    padding-right: 1rem;
+    font-size: 1.3rem;
+  }
+  .container li a{
+    width: 100vw;
   }
   nav{
     display: flex;
@@ -87,6 +102,10 @@ export default {
     color: aliceblue;
     font-size: 1.2rem;
     line-height: 2rem;
+  }
+  .authorize{
+    border-bottom: aliceblue 1px solid;
+    padding: 1rem 0;
   }
 
   @media screen and (max-width: 720px){
