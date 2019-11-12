@@ -25,6 +25,7 @@ import { signUser } from '../services/user_services'
 import { mapActions } from 'vuex';
 
 export default {
+  name: 'LoginForm',
   data(){
     return{
       user: {
