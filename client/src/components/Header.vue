@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="appbar">
     <nav>
       <router-link to='/'><h1>red | Resume</h1></router-link>
       <div class="menu">
@@ -7,12 +7,12 @@
       </div>
     </nav>
     <transition name="drawer">
-      <div class='container menuItems' v-show="showMenu">
+      <div class='container menuItems' v-if="showMenu">
           <ul>
             <li><router-link to='/howto'>How To</router-link></li>
             <li><router-link to='/contacts'>Contact Us</router-link></li>
             <li><router-link to='/about'>About Us</router-link></li>
-            <li v-show="authorized" @click="logout"><router-link to='/'>Log Out</router-link></li>
+            <li v-if="authorized" @click="logout"><router-link to='/'>Log Out</router-link></li>
           </ul>
       </div>
     </transition>
@@ -43,30 +43,35 @@ export default {
     logout(){
       signOutUser();
       this.toggleAuth(false);
+      this.$router.push({name: 'home'});
     }
   }
 }
 </script>
 
 <style scoped>
-  .container{
-    padding: 5rem 0rem 2rem 2rem;
-    width: 100vw;
-    background-color: #102D59;
-  }
-  nav{
+  .appbar{
     position: fixed;
     top:0;
+    width:100%;
+    z-index: 2;
+  }
+  .container{
+    padding: 1rem 2rem 2rem 2rem;
+    width: 100vw;
+    background-color: #102D59;
+    box-shadow: #000 0px 2px 10px;
+    z-index: 1;
+  }
+  nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 3.5rem;
-    width:100%;
-    box-shadow: lightgray 0px 2px 10px;
+    box-shadow: #000 0px 2px 10px;
     padding: 0rem 2rem;
     /* background-color: azure; */
     background-color: #102D59;
-    z-index: 2;
     color: azure;
   }
   button{
