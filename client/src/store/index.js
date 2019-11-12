@@ -5,9 +5,37 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    token: localStorage.token,
     authorized: false,
     user: null,
-    resume: null
+    resume: {
+      personal: {
+        name: '',
+        address: '',
+        email: '',
+        mobile: '',
+        dob: '',
+        sex: ''
+      },
+      education: [{
+        type: '',
+        year: '',
+        institute: '',
+        gpa: ''
+      }],
+      info: {
+        father: '',
+        mother: '',
+        status: '',
+        hobby: '',
+        religion: '',
+        blood: '',
+        nationality: '',
+        permanent: ''
+      },
+      languages: '',
+      skills: ''
+    }
   },
   getters:{
     getUser: state => {
@@ -15,6 +43,9 @@ export default new Vuex.Store({
     },
     getResume: state => {
       return state.resume;
+    },
+    getToken: state => {
+      return state.token;
     }
   },
   mutations: {
