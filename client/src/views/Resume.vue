@@ -4,14 +4,14 @@
       <h1 class="title">RESUME</h1>
 
       <section class="personal">
-        <h1>{{resumeX.name}}</h1>
-        <p>{{resumeX.email}}</p>
-        <p>{{resumeX.mobile}}</p>
-        <p>{{resumeX.address}}</p>
+        <h1>{{resumeX.personal.name}}</h1>
+        <p>{{resumeX.personal.email}}</p>
+        <p>{{resumeX.personal.mobile}}</p>
+        <p>{{resumeX.personal.address}}</p>
       </section>
 
       <h2>Educational Background</h2>
-      <section class="edu" v-for="(degree, idx) in resumeX.education" :key="idx">
+      <section class="edu" v-for="degree in resumeX.education" :key="degree.type">
         <div class="degree">
           <h3>Year {{degree.year}}</h3>
           <div class="edu_details">
@@ -26,21 +26,28 @@
       </section>
 
       <h2>Languages</h2>
-      <section class="lang" v-for="(lang, idx) in resumeX.skills" :key="idx">
+      <section class="lang" v-for="lang in resumeX.languages" :key="lang">
         <ul>
           <li><p>{{lang}}</p></li>
         </ul>
       </section>
 
+      <h2>Skills</h2>
+      <section class="lang" v-for="skill in resumeX.skills" :key="skill">
+        <ul>
+          <li><p>{{skill}}</p></li>
+        </ul>
+      </section>
+
       <h2>Personal Infromation</h2>
       <section class="info">
-        <div><h3>Father</h3> <p>{{resumeX.father}}</p></div>
-        <div><h3>Mother</h3> <p>{{resumeX.mother}}</p></div>
-        <div><h3>Date of Birth </h3> <p>{{resumeX.dob}}</p></div>
-        <div><h3>Blood Group</h3> <p>{{resumeX.blood}}</p></div>
-        <div><h3>Natinality</h3> <p>{{resumeX.nationality}}</p></div>
-        <div><h3>Maritial Status</h3> <p>{{resumeX.status}}</p></div>
-        <div><h3>Permanent Address</h3> <p>{{resumeX.permanent}}</p></div>
+        <div><h3>Father</h3> <p>{{resumeX.info.father}}</p></div>
+        <div><h3>Mother</h3> <p>{{resumeX.info.mother}}</p></div>
+        <div><h3>Date of Birth </h3> <p>{{resumeX.personal.dob}}</p></div>
+        <div><h3>Blood Group</h3> <p>{{resumeX.info.blood}}</p></div>
+        <div><h3>Natinality</h3> <p>{{resumeX.info.nationality}}</p></div>
+        <div><h3>Maritial Status</h3> <p>{{resumeX.info.status}}</p></div>
+        <div><h3>Permanent Address</h3> <p>{{resumeX.info.permanent}}</p></div>
       </section>
     </div>
   </transition>
@@ -48,16 +55,44 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { getResume } from '../services/profile_service'
+import { loadResume } from '../services/profile_service'
 
 export default {
   name: 'resume',
   data(){
     return{
-      resumeX: null
+      resumeX: {
+        personal: {
+          name: '',
+          address: '',
+          email: '',
+          mobile: '',
+          dob: '',
+          sex: ''
+        },
+        education: [{
+          type: '',
+          year: '',
+          institute: '',
+          gpa: ''
+        }],
+        info: {
+          father: '',
+          mother: '',
+          status: '',
+          hobby: '',
+          religion: '',
+          blood: '',
+          nationality: '',
+          permanent: ''
+        },
+        languages: '',
+        skills: ''
+      }
     }
   },
   methods: {
+    /* eslint-disable no-console */
     ...mapGetters([
       'getResume'
     ]),
@@ -69,9 +104,11 @@ export default {
   async beforeCreate(){
     /* eslint-disable no-console */
     try {
-      const resume = await getResume();
-      this.updateResume(resume);
-      this.resumeX = this.getResume();
+      const resume = await loadResume();
+      if(resume){
+        this.updateResume(resume);
+        this.resumeX = this.getResume();
+      }
       this.toggleAuth(true);
       console.log(resume);
     } catch (error) {

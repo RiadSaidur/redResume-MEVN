@@ -18,9 +18,25 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+/* eslint-disable no-console */
 
 export default {
-  name: 'home'
+  name: 'home',
+  computed: {
+    ...mapState(['token'])
+  },
+  methods: {
+    ...mapActions(['toggleAuth']),
+  },
+  created(){
+    console.log(this.token);
+    
+    if(this.token != 'null'){
+      this.$router.push({name: 'resume'});
+      this.toggleAuth();
+    }
+  }
 }
 </script>
 
