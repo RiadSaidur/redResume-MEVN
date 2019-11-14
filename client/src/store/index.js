@@ -57,6 +57,10 @@ export default new Vuex.Store({
     },
     TOGGLE: (state, value) => {
       state.authorized = value;
+      if(!value){
+        state.token = null;
+        localStorage.token = null;
+      }
     }
   },
   actions: {
