@@ -1,9 +1,9 @@
 <template>
   <div>
-    <section class="lang" v-for="(skill, idx) in skills" :key="skill">
-      <ul>
-        <li>
-          <input type="text" v-model="skills[idx]" class="p">
+    <section class="lang section" v-for="(skill, idx) in skills" :key="idx">
+      <ul class="ul">
+        <li class="li">
+          <input type="text" v-model="skills[idx]" class="p" placeholder="Add Skill">
         </li>
       </ul>
     </section>
@@ -21,5 +21,7 @@ export default {
 </script>
 
 <style scoped>
-
+section{
+  margin: 0;
+}
 </style>

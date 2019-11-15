@@ -15,7 +15,7 @@
       <div class="subheader"><h2>Skills</h2><button @click="newSkill">add</button></div>
       <Skills :skills='skills' />
 
-      <h2>Personal Infromation</h2>
+      <h2 class="subheader">Personal Infromation</h2>
       <Information :info='info' />
     </div>
   </transition>
@@ -87,7 +87,6 @@ export default {
         skills: this.skills,
         info: this.info
       }
-      console.log(resume);
       try {
         const updated = await updateResume(resume);
         this.refresh(updated);
@@ -103,17 +102,17 @@ export default {
       this.info = resume.info;
     },
     newSkill(){
-      this.skills.push('Add Skill');
+      this.skills.push('');
     },
     newLang(){
-      this.languages.push('Add Language');
+      this.languages.push('');
     },
     newEdu(){
       const data = {
-        type: 'Degree',
-        year: 'Year',
-        institute: 'Institute',
-        gpa: 'GPA'
+        type: '',
+        year: '',
+        institute: '',
+        gpa: ''
       }
       this.education.push(data);
     }
@@ -149,8 +148,7 @@ export default {
 </script>
 
 <style scoped>
-.container, h2{
-  width: 8.27in;
+.container{
   width: 8.27in;
   margin: 5rem auto 2rem auto;
   background-color: aqua;
@@ -162,55 +160,10 @@ export default {
   border-bottom: 1px solid black;
   padding-bottom: .5rem;
 }
-section{
-  margin-bottom: 2rem;
-  padding: 0rem 2rem;
-}
-ul{
-  padding-left: 2rem;
-}
-li{
-  list-style: circle;
-  font-weight: 500;
-  text-transform: capitalize;
-  line-height: 0rem;
-}
 .title{
   text-align: center;
   margin-bottom: 2rem;
   border-bottom: 1px solid black;
   padding-bottom: .5rem;
-}
-.degree{
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-}
-.institute{
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  align-items: center;
-}
-.institute > h3{
-  text-transform: uppercase;
-}
-.gpa{
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  align-items: center;
-}
-.info > div{
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  align-items: center;
-}
-.info p{
-  margin-left: 1rem;
-}
-
-.name{
-  border: none;
-  background: none;
-  font-size: 1.5rem;
-  font-weight: 600;
 }
 </style>

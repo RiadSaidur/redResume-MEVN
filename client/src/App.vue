@@ -37,6 +37,10 @@ a{
 li{
   list-style: none;
 }
+input{
+  width: 100%;
+  padding: .2rem .5rem;
+}
 .drawer-enter-active{
   transition: opacity 400ms ease;
 }
@@ -46,5 +50,22 @@ li{
 }
 .drawer-enter, .drawer-leave-to{
   opacity: 0;
+}
+.p{
+  border: none;
+  background: none;
+  font-size: 1rem;
+}
+.li{
+  list-style: circle;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.section{
+  margin-bottom: 2rem;
+  padding: 0rem 2rem;
+}
+.ul{
+  padding-left: 2rem;
 }
 </style>
