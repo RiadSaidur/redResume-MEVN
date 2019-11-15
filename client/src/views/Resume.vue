@@ -3,100 +3,20 @@
     <div class="container">
       <button @click="save">Save</button>
       <h1 class="title">RESUME</h1>
-
-      <section class="personal">
-        <input type="text" v-model="resumeX.personal.name" class="h1">
+      
+      <Personal :personal='personal' />
         
-        <input type="text" v-model="resumeX.personal.email" class="p">
-        <input type="text" v-model="resumeX.personal.mobile" class="p">
-        <input type="text" v-model="resumeX.personal.address" class="p">
-        <!-- <h1>{{resumeX.personal.name}}</h1>
-        <p>{{resumeX.personal.email}}</p>
-        <p>{{resumeX.personal.mobile}}</p>
-        <p>{{resumeX.personal.address}}</p> -->
-      </section>
+      <div class="subheader"><h2>Educational Background</h2><button @click="newEdu">add</button></div>
+      <Education :education='education' />
 
-      <div class="subheader"><h2>Educational Background</h2><button>add</button></div>
-      <section class="edu" v-for="degree in resumeX.education" :key="degree.type">
-        <div class="degree">
-          <input type="text" v-model="degree.year" class="h3">
-          <!-- <h3>Year {{degree.year}}</h3> -->
-          <div class="edu_details">
-            <div class="institute">
-              <input type="text" v-model="degree.type" class="h3">
-              <input type="text" v-model="degree.institute" class="p">
-              <!-- <h3>{{degree.type}}:</h3> <p>{{degree.institute}}</p> -->
-            </div>
-            <div class="gpa">
-              <h3>GPA:</h3> 
-              <!-- <p>{{degree.gpa}}</p> -->
-              <input type="text" v-model="degree.gpa" class="p">
-            </div>
-          </div>
-        </div>
-      </section>
+      <div class="subheader"><h2>Languages</h2><button @click="newLang">add</button></div>
+      <languages :languages='languages' />
 
-      <!-- <h2>Languages</h2> -->
-      <div class="subheader"><h2>Languages</h2><button>add</button></div>
-      <section class="lang" v-for="(lang, idx) in resumeX.languages" :key="lang">
-        <ul>
-          <li>
-            <!-- <p>{{lang}}</p> -->
-            <input type="text" v-model="resumeX.languages[idx]" class="p">
-          </li>
-        </ul>
-      </section>
+      <div class="subheader"><h2>Skills</h2><button @click="newSkill">add</button></div>
+      <Skills :skills='skills' />
 
-      <!-- <h2>Skills</h2> -->
-      <div class="subheader"><h2>Skills</h2><button>add</button></div>
-      <section class="lang" v-for="(skill, idx) in resumeX.skills" :key="skill">
-        <ul>
-          <li>
-            <!-- <p>{{skill}}</p> -->
-            <input type="text" v-model="resumeX.skills[idx]" class="p">
-          </li>
-        </ul>
-      </section>
-
-      <!-- <h2>Personal Infromation</h2> -->
-      <div class="subheader"><h2>Personal Infromation</h2><button>add</button></div>
-      <section class="info">
-        <div>
-          <h3>Father</h3> 
-          <!-- <p>{{resumeX.info.father}}</p> -->
-          <input type="text" v-model="resumeX.info.father" class="p">
-        </div>
-        <div>
-          <h3>Mother</h3> 
-          <!-- <p>{{resumeX.info.mother}}</p> -->
-          <input type="text" v-model="resumeX.info.mother" class="p">
-        </div>
-        <div>
-          <h3>Date of Birth </h3> 
-          <!-- <p>{{resumeX.personal.dob}}</p> -->
-          <input type="text" v-model="resumeX.personal.dob" class="p">
-        </div>
-        <div>
-          <h3>Blood Group</h3> 
-          <!-- <p>{{resumeX.info.blood}}</p> -->
-          <input type="text" v-model="resumeX.info.blood" class="p">
-        </div>
-        <div>
-          <h3>Natinality</h3> 
-          <!-- <p>{{resumeX.info.nationality}}</p> -->
-          <input type="text" v-model="resumeX.info.nationality" class="p">
-        </div>
-        <div>
-          <h3>Maritial Status</h3> 
-          <!-- <p>{{resumeX.info.status}}</p> -->
-          <input type="text" v-model="resumeX.info.status" class="p">
-        </div>
-        <div>
-          <h3>Permanent Address</h3> 
-          <!-- <p>{{resumeX.info.permanent}}</p> -->
-          <input type="text" v-model="resumeX.info.permanent" class="p">
-        </div>
-      </section>
+      <h2>Personal Infromation</h2>
+      <Information :info='info' />
     </div>
   </transition>
 </template>
@@ -106,38 +26,49 @@
 import { mapGetters, mapActions } from 'vuex'
 import { loadResume, updateResume } from '../services/profile_service'
 
+import Personal from '../components/Personal'
+import Education from '../components/Education'
+import Languages from '../components/Languages'
+import Skills from '../components/Skills'
+import Information from '../components/Information'
+
 export default {
   name: 'resume',
+  components: {
+    Personal,
+    Education,
+    Languages,
+    Skills,
+    Information
+  },
   data(){
     return{
-      resumeX: {
-        personal: {
-          name: '',
-          address: '',
-          email: '',
-          mobile: '',
-          dob: '',
-          sex: ''
-        },
-        education: [{
-          type: '',
-          year: '',
-          institute: '',
-          gpa: ''
-        }],
-        info: {
-          father: '',
-          mother: '',
-          status: '',
-          hobby: '',
-          religion: '',
-          blood: '',
-          nationality: '',
-          permanent: ''
-        },
-        languages: '',
-        skills: ''
-      }
+      personal: {
+        name: '',
+        address: '',
+        email: '',
+        mobile: '',
+        dob: '',
+        sex: ''
+      },
+      education: [{
+        type: '',
+        year: '',
+        institute: '',
+        gpa: ''
+      }],
+      info: {
+        father: '',
+        mother: '',
+        status: '',
+        hobby: '',
+        religion: '',
+        blood: '',
+        nationality: '',
+        permanent: ''
+      },
+      languages: '',
+      skills: ''
     }
   },
   methods: {
@@ -149,8 +80,42 @@ export default {
       'toggleAuth'
     ]),
     async save(){
-      const updated = await updateResume(this.resumeX);
-      this.resume = updated;
+      const resume = {
+        personal: this.personal,
+        education: this.education,
+        languages: this.languages,
+        skills: this.skills,
+        info: this.info
+      }
+      console.log(resume);
+      try {
+        const updated = await updateResume(resume);
+        this.refresh(updated);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    refresh(resume){
+      this.personal = resume.personal;
+      this.education = resume.education;
+      this.languages = resume.languages;
+      this.skills = resume.skills;
+      this.info = resume.info;
+    },
+    newSkill(){
+      this.skills.push('Add Skill');
+    },
+    newLang(){
+      this.languages.push('Add Language');
+    },
+    newEdu(){
+      const data = {
+        type: 'Degree',
+        year: 'Year',
+        institute: 'Institute',
+        gpa: 'GPA'
+      }
+      this.education.push(data);
     }
   },
   async beforeCreate(){
@@ -158,10 +123,10 @@ export default {
       const resume = await loadResume();
       if(resume){
         this.updateResume(resume);
-        this.resumeX = this.getResume();
+        this.refresh(resume);
       }
-      this.toggleAuth(true);
       console.log(resume);
+      this.toggleAuth(true);
     } catch (error) {
       this.$router.push({name: 'signin'});
       console.log(error);
@@ -184,7 +149,7 @@ export default {
 </script>
 
 <style scoped>
-.container{
+.container, h2{
   width: 8.27in;
   width: 8.27in;
   margin: 5rem auto 2rem auto;

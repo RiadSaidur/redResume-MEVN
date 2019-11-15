@@ -2,6 +2,7 @@
   <div class="container">
     <section>
       <h2>Personal</h2>
+
       <form @submit.prevent>
         <label for="name" class="inp">
           <input type="text" id="name" placeholder=" " v-model="resume.personal.name">
@@ -35,8 +36,10 @@
         </label>
       </form>
     </section>
+
     <section>
       <h2>Education</h2>
+      
       <form @submi.prevent v-for="(degree, idx) in resume.education" :key="idx">
         <h3>{{ degree.type }}</h3>
         <label :for="degree.type" class="inp">
@@ -61,8 +64,10 @@
         </label>
       </form>
     </section>
+
     <section>
       <h2>Skills</h2>
+
       <form @submit.prevent v-for="(skill, idx) in resume.skills" :key="idx">
         <label :for="idx" class="inp">
           <input type="text" :id="idx" placeholder=" " v-model="resume.skills[idx]">
@@ -71,8 +76,10 @@
         </label>
       </form>
     </section>
+
     <section>
       <h2>Languages</h2>
+
       <form @submit.prevent v-for="(language, idx) in resume.languages" :key="idx">
         <label :for="idx" class="inp">
           <input type="text" :id="idx" placeholder=" " v-model="resume.languages[idx]">
@@ -81,8 +88,10 @@
         </label>
       </form>
     </section>
+
     <section>
       <h2>Others</h2>
+
       <form @submit.prevent>
         <label for="father" class="inp">
           <input type="text" id="father" placeholder=" " v-model="resume.info.father">
@@ -180,13 +189,14 @@ export default {
   async created(){
     /* eslint-disable no-console */
     try {
-      const loadedResume = await this.getResume();
+      const loadedResume = this.getResume();
       if(!loadedResume.personal.name){
-        this.updateResume(loadResume());
+        this.resume = await loadResume();
+        this.updateResume(this.resume);
       }
-      this.resume = await this.getResume();
+      else this.resume = loadedResume;
       this.toggleAuth(true);
-      // console.log(resume);
+      console.log(this.resume.education.length);
     } catch (error) {
       this.toggleAuth(false);
       this.$router.push({name: 'home'});
