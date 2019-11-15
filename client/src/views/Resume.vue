@@ -1,22 +1,27 @@
 <template>
   <transition name="drawer">
     <div class="container">
-      <button @click="save">Save</button>
-      <h1 class="title">RESUME</h1>
+      <div class="cta">
+        <button @click="save">Save</button>
+        <button @click="printResume">Print</button>
+      </div>
+      <div class="resume">
+        <h1 class="title">RESUME</h1>
       
-      <Personal :personal='personal' />
-        
-      <div class="subheader"><h2>Educational Background</h2><button @click="newEdu">add</button></div>
-      <Education :education='education' />
+        <Personal :personal='personal' />
+          
+        <div class="subheader"><h2>Educational Background</h2><button @click="newEdu" class="cta">+</button></div>
+        <Education :education='education' />
 
-      <div class="subheader"><h2>Languages</h2><button @click="newLang">add</button></div>
-      <languages :languages='languages' />
+        <div class="subheader"><h2>Languages</h2><button @click="newLang" class="cta">+</button></div>
+        <languages :languages='languages' />
 
-      <div class="subheader"><h2>Skills</h2><button @click="newSkill">add</button></div>
-      <Skills :skills='skills' />
+        <div class="subheader"><h2>Skills</h2><button @click="newSkill" class="cta">+</button></div>
+        <Skills :skills='skills' />
 
-      <h2 class="subheader">Personal Infromation</h2>
-      <Information :info='info' />
+        <h2 class="subheader">Personal Infromation</h2>
+        <Information :info='info' />
+      </div>
     </div>
   </transition>
 </template>
@@ -79,6 +84,38 @@ export default {
       'updateResume',
       'toggleAuth'
     ]),
+    printResume(){
+      // const doc = document.body.innerHTML;
+      // const resume = document.querySelector('.resume').innerHTML;
+      // document.body.innerHTML = resume;
+      // window.print();
+      // document.body.innerHTML = doc;
+
+      // const resume = document.querySelector('.resume');
+      // const newWindow = window.open();
+      // newWindow.document.write(resume.innerHTML);
+      // newWindow.document.close();
+      // newWindow.focus();
+      // newWindow.print();
+      // newWindow.close();
+
+      // const resume = document.querySelector('.resume').innerHTML;
+      
+      // document.body.innerHTML = resume;
+      // window.print();
+
+      // document = doc;
+
+      document.querySelector('.appbar').style.display = 'none';
+      document.querySelector('.cta').style.display = 'none';
+      document.querySelector('.container').style.marginTop = 0;
+
+      window.print();
+
+      document.querySelector('.appbar').style.display = 'block';
+      document.querySelector('.cta').style.display = 'block';
+      document.querySelector('.container').style.marginTop = '5rem';
+    },
     async save(){
       const resume = {
         personal: this.personal,
@@ -133,32 +170,37 @@ export default {
     }
   },
   // mounted(){
-  //   document.addEventListener('click', e => {
-  //     if(e.altKey){
-  //       document.querySelector('.appbar').style.display = 'block';
-  //       document.querySelector('.container').style.marginTop = '5rem';  
-  //     }
-  //     else{
-  //       document.querySelector('.appbar').style.display = 'none';
-  //       document.querySelector('.container').style.marginTop = 0;
-  //     }
-  //   });
+  //   
   // }
 }
 </script>
 
 <style scoped>
 .container{
-  width: 8.27in;
   margin: 5rem auto 2rem auto;
+}
+.resume{
+  margin: auto;
+  width: 8.27in;
   background-color: aqua;
   padding: 2rem 1rem;
 }
 .subheader{
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin-bottom: 1rem;
   border-bottom: 1px solid black;
   padding-bottom: .5rem;
+}
+.subheader > button{
+  margin-left: 1rem;
+  padding: 0 .6rem;
+  font-size: 2rem;
+  font-weight: 600;
+  background: none;
+  border: 2px solid black;
+  border-radius: 1000px;
+  box-shadow: black 0px 0px 4px;
 }
 .title{
   text-align: center;

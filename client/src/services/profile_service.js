@@ -7,8 +7,12 @@ const auth_token = localStorage.token;
 
 export async function loadResume(){
   if(!auth_token) return {error: 'Access Denied'};
-  const res =  await axios.get(`${baseURI}/`, {headers: { auth_token }});
-  return res.data.resume;
+  try {
+    const res =  await axios.get(`${baseURI}/`, {headers: { auth_token }});
+    return res.data.resume;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function updateResume( resume ){
