@@ -15,7 +15,6 @@ export async function updateResume( resume ){
   if(!auth_token) return {error: 'Access Denied'};
   try {
     const res =  await axios.patch(`${baseURI}/update`, resume ,  {headers: { auth_token }});
-    console.log(`ops`);
     return res.data.resume;
   } catch (error) {
     console.log(error);

@@ -10,6 +10,7 @@ const personalSchema = Joi.object({
 });
 
 const eduSchema = Joi.object({
+  _id: Joi.string(),
   type: Joi.string().required(),
   institute: Joi.string().required(),
   year: Joi.number().required(),
