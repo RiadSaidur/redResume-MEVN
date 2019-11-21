@@ -1,10 +1,7 @@
 <template>
   <transition name="drawer">
     <div class="container">
-      <div class="cta">
-        <button @click="save">Save</button>
-        <button @click="printResume">Print</button>
-      </div>
+      <CTA @printResume='printResume' @save='save' class="cta"/>
       <div class="resume">
         <h1 class="title">RESUME</h1>
       
@@ -31,6 +28,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import { loadResume, updateResume } from '../services/profile_service'
 
+import CTA from '../components/CTA'
 import Personal from '../components/Personal'
 import Education from '../components/Education'
 import Languages from '../components/Languages'
@@ -40,6 +38,7 @@ import Information from '../components/Information'
 export default {
   name: 'resume',
   components: {
+    CTA,
     Personal,
     Education,
     Languages,
@@ -106,15 +105,45 @@ export default {
 
       // document = doc;
 
-      document.querySelector('.appbar').style.display = 'none';
-      document.querySelector('.cta').style.display = 'none';
-      document.querySelector('.container').style.marginTop = 0;
+      // document.querySelector('.appbar').style.display = 'none';
+      // const ctas = document.querySelectorAll('.cta');
+      // ctas.forEach(cta => {
+      //   cta.style.display = 'none';
+      // });
+      // document.querySelector('.container').style.marginTop = 0;
+      // document.querySelector('.resume').style.border = 'none';
 
       window.print();
 
-      document.querySelector('.appbar').style.display = 'block';
-      document.querySelector('.cta').style.display = 'block';
-      document.querySelector('.container').style.marginTop = '5rem';
+      // document.querySelector('.appbar').style.display = 'block';
+      // ctas.forEach(cta => {
+      //   cta.style.display = 'grid';
+      // });
+      // document.querySelector('.container').style.marginTop = '5rem';
+      // document.querySelector('.resume').style.border = '1px solid black';
+    },
+    async refresh(){
+      try {
+        const resume = await loadResume();
+        if(resume){
+          this.updateResume(resume);
+          // this.refresh(resume);
+          console.log(resume);
+          this.toggleAuth(true);
+          
+          this.personal = resume.personal;
+          this.education = resume.education;
+          this.languages = resume.languages;
+          this.skills = resume.skills;
+          this.info = resume.info;
+        }
+        else{
+          this.$router.push({name: 'signin'});
+          this.toggleAuth(false);
+        }
+      } catch (error) {
+        console.log(error);      
+      }
     },
     async save(){
       const resume = {
@@ -125,18 +154,11 @@ export default {
         info: this.info
       }
       try {
-        const updated = await updateResume(resume);
-        this.refresh(updated);
+        await updateResume(resume);
+        this.refresh();
       } catch (error) {
         console.log(error);
       }
-    },
-    refresh(resume){
-      this.personal = resume.personal;
-      this.education = resume.education;
-      this.languages = resume.languages;
-      this.skills = resume.skills;
-      this.info = resume.info;
     },
     newSkill(){
       this.skills.push('');
@@ -152,38 +174,25 @@ export default {
         gpa: ''
       }
       this.education.push(data);
-    }
+    },
   },
-  async beforeCreate(){
-    try {
-      const resume = await loadResume();
-      if(resume){
-        this.updateResume(resume);
-        this.refresh(resume);
-      }
-      console.log(resume);
-      this.toggleAuth(true);
-    } catch (error) {
-      this.$router.push({name: 'signin'});
-      console.log(error);
-      this.toggleAuth(false);
-    }
-  },
-  // mounted(){
-  //   
-  // }
+  async created(){
+    await this.refresh();
+  }
 }
 </script>
 
 <style scoped>
 .container{
   margin: 5rem auto 2rem auto;
+  display: grid;
+  grid-template-columns: 1fr 11fr;
 }
 .resume{
   margin: auto;
   width: 8.27in;
-  background-color: aqua;
   padding: 2rem 1rem;
+  border: 1px solid black;
 }
 .subheader{
   display: flex;
@@ -193,19 +202,32 @@ export default {
   padding-bottom: .5rem;
 }
 .subheader > button{
+  display: grid;
   margin-left: 1rem;
-  padding: 0 .6rem;
-  font-size: 2rem;
+  padding: 0 .45rem;
+  font-size: 1.5rem;
   font-weight: 600;
   background: none;
   border: 2px solid black;
   border-radius: 1000px;
-  box-shadow: black 0px 0px 4px;
+  box-shadow: black 0px 0px 3px;
 }
 .title{
   text-align: center;
   margin-bottom: 2rem;
   border-bottom: 1px solid black;
   padding-bottom: .5rem;
+}
+@media print{
+  .resume{
+    border: none;
+  }
+  .container{
+    margin-top: 0;
+  }
+  body .cta{
+    display: none;
+    font-size: 10rem;
+  }
 }
 </style>
