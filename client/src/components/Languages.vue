@@ -21,8 +21,8 @@ export default {
   props: ['languages'],
   methods: {
     deleteItem(idx){
-      if(!this.skills[idx].length){
-        this.skills.splice(idx, 1);
+      if(!this.languages[idx].length){
+        this.languages.splice(idx, 1);
       }
     }
   }

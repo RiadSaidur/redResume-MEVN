@@ -40,11 +40,10 @@ export default {
     ]),
     async signin(){
       /* eslint-disable no-console */
-      const { token, error } = await signUser(this.user);
+      const { error } = await signUser(this.user);
       this.user.password = null;
       if(error) console.log(error);
       else {
-        console.log(token);
         this.updateUser(this.user.email);
         this.$router.push({name: 'resume'});
       }

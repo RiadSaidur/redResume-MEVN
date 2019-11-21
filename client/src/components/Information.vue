@@ -22,12 +22,13 @@
     </div>
     <div>
       <h3>Permanent Address</h3> 
-      <input type="text" v-model="info.permanent" class="p" placeholder="Permanent Address">
+      <textarea type="text" v-model="info.permanent" class="p" placeholder="Permanent Address"></textarea>
     </div>
   </section>
 </template>
 
 <script>
+/* eslint-disable no-console */
 export default {
   name: 'infromation',
   props: ['info']
@@ -35,6 +36,10 @@ export default {
 </script>
 
 <style scoped>
+textarea{
+  font-family: inherit;
+  resize: none;
+}
 .info{
   margin-left: 2rem;
 }
