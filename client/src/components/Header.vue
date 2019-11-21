@@ -27,7 +27,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { signOutUser } from '../services/user_services'
 
 export default {
   name: 'Header',
@@ -47,7 +46,7 @@ export default {
       this.showMenu = !this.showMenu;
     },
     logout(){
-      signOutUser();
+      localStorage.removeItem('token');  
       this.toggleAuth(false);
       this.$router.push({name: 'home'});
     }

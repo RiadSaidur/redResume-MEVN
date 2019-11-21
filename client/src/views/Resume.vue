@@ -25,7 +25,7 @@
 
 <script>
 /* eslint-disable no-console */
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import { loadResume, updateResume } from '../services/profile_service'
 
 import CTA from '../components/CTA'
@@ -76,11 +76,7 @@ export default {
     }
   },
   methods: {
-    ...mapGetters([
-      'getResume'
-    ]),
     ...mapActions([
-      'updateResume',
       'toggleAuth'
     ]),
     printResume(){
@@ -125,10 +121,9 @@ export default {
     async refresh(){
       try {
         const resume = await loadResume();
+        console.log(resume);
+        
         if(resume){
-          this.updateResume(resume);
-          // this.refresh(resume);
-          console.log(resume);
           this.toggleAuth(true);
           
           this.personal = resume.personal;
@@ -176,7 +171,7 @@ export default {
       this.education.push(data);
     },
   },
-  async created(){
+  async mounted(){
     await this.refresh();
   }
 }

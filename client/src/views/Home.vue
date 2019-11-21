@@ -25,14 +25,17 @@ export default {
   name: 'home',
   methods: {
     ...mapActions(['toggleAuth']),
-  },
-  created(){
-    console.log(localStorage.token);
-    
-    if(localStorage.token !='null'){
-      this.$router.push({name: 'resume'});
-      this.toggleAuth();
+    redirect(){
+      if(localStorage.token){
+        console.log(localStorage.getItem('token'));
+        
+        this.$router.push({name: 'resume'});
+        this.toggleAuth();
+      }
     }
+  },
+  mounted(){
+    this.redirect();
   }
 }
 </script>

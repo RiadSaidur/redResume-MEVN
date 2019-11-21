@@ -15,13 +15,10 @@ export async function regUser(user){
 export async function signUser(user){
   try {
     const res = await axios.post(`${baseURI}/login`, user);
-    localStorage.token = res.data.token;
+    localStorage.setItem('token', res.data.token);
+    // localStorage.token = res.data.token;
     return { token: res.data.token };
   } catch (error) {
-    return { error: 'Email or Password is invalid' };
+    console.log(error);
   }
-}
-
-export function signOutUser(){
-  localStorage.token = null;
 }
