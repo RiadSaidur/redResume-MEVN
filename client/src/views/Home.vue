@@ -18,21 +18,18 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 /* eslint-disable no-console */
 
 export default {
   name: 'home',
-  computed: {
-    ...mapState(['token'])
-  },
   methods: {
     ...mapActions(['toggleAuth']),
   },
   created(){
-    console.log(this.token);
+    console.log(localStorage.token);
     
-    if(this.token != 'null'){
+    if(localStorage.token !='null'){
       this.$router.push({name: 'resume'});
       this.toggleAuth();
     }

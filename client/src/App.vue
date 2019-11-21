@@ -26,6 +26,8 @@ body{
 }
 button{
   cursor: pointer;
+  background: none;
+  border: none;
 }
 button:focus{
   outline: 0;
@@ -37,7 +39,7 @@ a{
 li{
   list-style: none;
 }
-input{
+input, textarea{
   width: 100%;
   padding: .2rem .5rem;
 }
@@ -67,5 +69,10 @@ input{
 }
 .ul{
   padding-left: 2rem;
+}
+@media print {
+  .appbar{
+    display: none;
+  }
 }
 </style>
