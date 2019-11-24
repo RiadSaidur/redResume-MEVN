@@ -22,7 +22,9 @@ export default {
   box-sizing: border-box;
 }
 body{
-  background-color: rgba(240, 248, 255, 0.384);
+  /* background-color: rgba(240, 248, 255, 0.384); */
+  background: linear-gradient(153.52deg, #D2A6FF 8.55%, rgba(219, 184, 255, 0.796875) 31.42%, rgba(255, 255, 255, 0) 79.4%), #FFA8A6;
+  min-height: 100vh;
 }
 button{
   cursor: pointer;

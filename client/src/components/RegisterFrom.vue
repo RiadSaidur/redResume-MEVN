@@ -21,7 +21,9 @@
         <span class="label">Repeat Password</span>
         <span class="border"></span>
       </label>
-      <button @click="register">Register</button>
+      <div class="btns">
+        <button @click="register">Register</button>
+      </div>
     </form>
     <p>Already have an account? <router-link to='/signin'>Sign In</router-link> </p>
   </div>
@@ -82,7 +84,7 @@ export default {
     top: 16px;
     left: 0;
     font-size: 16px;
-    color: #9098a9;
+    color: black;
     font-weight: 500;
     transform-origin: 0 0;
     transition: all 0.2s ease;
@@ -93,7 +95,7 @@ export default {
     left: 0;
     height: 2px;
     width: 100%;
-    background: #07f;
+    background: black;
     transform: scaleX(0);
     transform-origin: 0 0;
     transition: all 0.15s ease;
@@ -107,7 +109,7 @@ export default {
     height: 48px;
     font-size: 16px;
     font-weight: 500;
-    border-bottom: 2px solid #c8ccd4;
+    border-bottom: 2px solid #000000;
     background: none;
     border-radius: 0;
     color: #223254;
@@ -143,6 +145,13 @@ export default {
     margin-top: 1rem;
   }
   a{
-    color: rgba(21, 12, 153, 0.911);
+    color: rgb(184, 15, 49);
+  }
+  .btns{
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>

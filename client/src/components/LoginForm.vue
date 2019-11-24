@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <img src="../assets/user.svg" alt="">
     <form @submit.prevent>
       <label for="email" class="inp">
         <input type="email" id="email" placeholder=" " v-model="user.email">
@@ -13,9 +14,9 @@
       </label>
       <div class="btns">
         <button @click="signin">Sign In</button>
-        <router-link to='/'>Forgot Password?</router-link>
       </div>
     </form>
+    <router-link to='/'>Forgot Password?</router-link>
     <p>Don't have an account? <router-link to='/signup'>Sign up</router-link> </p>
   </div>
 </template>
@@ -62,6 +63,10 @@ export default {
   form{
     display: flex;
     flex-direction: column;
+    margin-top: 1rem;
+  }
+  img{
+    pointer-events: none;
   }
   .inp {
     position: relative;
@@ -73,7 +78,7 @@ export default {
     top: 16px;
     left: 0;
     font-size: 16px;
-    color: #9098a9;
+    color: black;
     font-weight: 500;
     transform-origin: 0 0;
     transition: all 0.2s ease;
@@ -84,7 +89,7 @@ export default {
     left: 0;
     height: 2px;
     width: 100%;
-    background: #07f;
+    background: black;
     transform: scaleX(0);
     transform-origin: 0 0;
     transition: all 0.15s ease;
@@ -98,7 +103,7 @@ export default {
     height: 48px;
     font-size: 16px;
     font-weight: 500;
-    border-bottom: 2px solid #c8ccd4;
+    border-bottom: 2px solid #000000;
     background: none;
     border-radius: 0;
     color: #223254;
@@ -120,12 +125,11 @@ export default {
     transform: scaleX(1);
   }
   button{
-    background: white;
-    border: 2px solid rgba(19, 9, 165, 0.911);
+    background: rgba(148, 148, 148, 0.57);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 1000px;
     width: 6rem;
     height: 2rem;
-    margin-top: 1rem;
     font-size: 16px;
     color: rgba(21, 12, 153, 0.911);
     font-weight: 600;
@@ -134,9 +138,13 @@ export default {
     margin-top: 1rem;
   }
   a{
-    color: rgba(21, 12, 153, 0.911);
+    color: rgb(184, 15, 49);
   }
-  .btns > a{
-    margin-left: 1rem;
+  .btns{
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>

@@ -60,11 +60,11 @@ export default {
     top:0;
     width:100%;
     z-index: 2;
+    background-color: #D2A6FF;
   }
   .container{
     padding: 0rem 2rem 2rem 2rem;
     width: 100vw;
-    background-color: #102D59;
     box-shadow: #000 0px 2px 10px;
     z-index: 1;
   }
@@ -84,8 +84,7 @@ export default {
     height: 3.5rem;
     box-shadow: #000 0px 2px 10px;
     padding: 0rem 2rem;
-    /* background-color: azure; */
-    background-color: #102D59;
+    border: 0.5px solid rgba(0, 0, 0, 0.31);
     color: azure;
   }
   button{

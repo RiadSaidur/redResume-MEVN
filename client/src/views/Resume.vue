@@ -80,50 +80,17 @@ export default {
       'toggleAuth'
     ]),
     printResume(){
-      // const doc = document.body.innerHTML;
-      // const resume = document.querySelector('.resume').innerHTML;
-      // document.body.innerHTML = resume;
-      // window.print();
-      // document.body.innerHTML = doc;
-
-      // const resume = document.querySelector('.resume');
-      // const newWindow = window.open();
-      // newWindow.document.write(resume.innerHTML);
-      // newWindow.document.close();
-      // newWindow.focus();
-      // newWindow.print();
-      // newWindow.close();
-
-      // const resume = document.querySelector('.resume').innerHTML;
-      
-      // document.body.innerHTML = resume;
-      // window.print();
-
-      // document = doc;
-
-      // document.querySelector('.appbar').style.display = 'none';
-      // const ctas = document.querySelectorAll('.cta');
-      // ctas.forEach(cta => {
-      //   cta.style.display = 'none';
-      // });
-      // document.querySelector('.container').style.marginTop = 0;
-      // document.querySelector('.resume').style.border = 'none';
-
       window.print();
-
-      // document.querySelector('.appbar').style.display = 'block';
-      // ctas.forEach(cta => {
-      //   cta.style.display = 'grid';
-      // });
-      // document.querySelector('.container').style.marginTop = '5rem';
-      // document.querySelector('.resume').style.border = '1px solid black';
     },
     async refresh(){
       try {
         const resume = await loadResume();
         console.log(resume);
-        
-        if(resume){
+        if(resume.error){
+          this.$router.push({name: 'home'});
+          this.toggleAuth(false);
+        }
+        else if(resume){
           this.toggleAuth(true);
           
           this.personal = resume.personal;
@@ -131,10 +98,6 @@ export default {
           this.languages = resume.languages;
           this.skills = resume.skills;
           this.info = resume.info;
-        }
-        else{
-          this.$router.push({name: 'signin'});
-          this.toggleAuth(false);
         }
       } catch (error) {
         console.log(error);      
@@ -188,6 +151,7 @@ export default {
   width: 8.27in;
   padding: 2rem 1rem;
   border: 1px solid black;
+  background-color: aliceblue;
 }
 .subheader{
   display: flex;
