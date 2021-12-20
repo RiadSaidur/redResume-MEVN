@@ -26,9 +26,9 @@ const routes = [
     component: () => import('../views/Resume.vue')
   },
   {
-    path: '/update',
-    name: 'update',
-    component: () => import('../views/Update.vue')
+    path: '/:catchAll(.*)',
+    name: '404',
+    component: () => import(/* webpackChunkName: "404" */ '../views/404.vue')
   }
 ]
 

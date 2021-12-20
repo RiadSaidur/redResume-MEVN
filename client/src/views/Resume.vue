@@ -151,7 +151,7 @@ export default {
   width: 8.27in;
   padding: 2rem 1rem;
   border: 1px solid black;
-  background-color: aliceblue;
+  background-color: white;
 }
 .subheader{
   display: flex;

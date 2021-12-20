@@ -2,23 +2,17 @@
   <div class="appbar">
     <nav>
       <router-link to='/'><h1>red | Resume</h1></router-link>
-      <div class="menu">
+      <div class="menu" v-if="authorized">
         <button @click="toggleNav"><img src="../assets/hamburger.svg" alt="menu"></button>
       </div>
     </nav>
     <transition name="drawer">
       <div class='container menuItems' v-if="showMenu">
           <ul @click="toggleNav">
-            <div v-if="authorized" class="authorize">
-              <li><router-link to='/update'>Update</router-link></li>
+            <div class="authorize">
               <li><router-link to='/resume'>Resume</router-link></li>
               <li  @click="logout"><router-link to='/'>Log Out</router-link></li>
             </div>
-            <div v-if="!authorized" class="authorize">
-              <li><router-link to='/contacts'>Contact Us</router-link></li>
-              <li><router-link to='/about'>About Us</router-link></li>
-            </div>
-            <li><router-link to='/howto'>How To</router-link></li>
           </ul>
       </div>
     </transition>
@@ -60,12 +54,12 @@ export default {
     top:0;
     width:100%;
     z-index: 2;
-    background-color: #D2A6FF;
+    background-color: #23083f;
   }
   .container{
     padding: 0rem 2rem 2rem 2rem;
     width: 100vw;
-    box-shadow: #000 0px 2px 10px;
+    box-shadow: #000 0px 0px 10px;
     z-index: 1;
   }
   .container li {

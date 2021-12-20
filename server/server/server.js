@@ -21,7 +21,9 @@ const options = {
   useNewUrlParser: true
 };
 
-mongoose.connect(process.env.MONGODB_URI, options);
+const mongodbURI = `mongodb+srv://${process.env.USER}:${process.env.MONGODB_PASSWORD}@netjobs.jglqn.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`
+
+mongoose.connect(mongodbURI, options);
 mongoose.connection.on('connected', () => {
   console.log('connected to DB');
 });
